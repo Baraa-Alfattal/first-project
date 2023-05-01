@@ -8,10 +8,10 @@
                 @csrf
                 {{-- cross site request forgery --}}
                 <div>
-                    <label for="user-first-name">First Name</label>
-                    <input id="user-first-name" name="user-first-name" value="{{ old('user-first-name') }}" type="text">
-                    @error('user-first-name')
-                        <div class="frome-error">
+                    <label for="user_first_name">First Name</label>
+                    <input id="user_first_name" name="user_first_name" value="{{ old('user_first_name') }}" type="text">
+                    @error('user_first_name')
+                        <div class="forme-error">
                             {{ $message }}
                         </div>
                     @enderror
@@ -21,7 +21,7 @@
                     <label for="user-last-name">Last Name</label>
                     <input id="user-last-name" name="user-last-name" value="{{ old('user-last-name') }}" type="text">
                     @error('user-last-name')
-                        <div class="frome-error">
+                        <div class="forme-error">
                             {{ $message }}
                         </div>
                     @enderror
@@ -31,7 +31,7 @@
                     <label for="email">Email</label>
                     <input id="email" name="email" value="{{ old('email') }}" type="text">
                     @error('email')
-                        <div class="frome-error">
+                        <div class="forme-error">
                             {{ $message }}
                         </div>
                     @enderror
