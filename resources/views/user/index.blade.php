@@ -10,17 +10,17 @@
         <div>
             @if (count($user) > 0)
                 <ul>
-                        <a href="{{ route('users.show', ['user' => $user['id']]) }}">
-                            <li>
-                                <p> {{ $user['first_name'] }}
-                                    ({{ $user['last_name'] }})
-                                    {{ $user['email'] }}
-                                    {{ $user['is_admin'] }}
-                                    {{ $user['is_student'] }}
-                                    {{ $user['school_owner'] }}
-                                </p>
-                            </li>
-                        </a>
+                    <a href="{{ route('users.show', ['user' => $user['id']]) }}">
+                        <li>
+                            <p> {{ $user['first_name'] }}
+                                ({{ $user['last_name'] }})
+                                {{ $user['email'] }}
+                                {{ $user['is_admin'] }}
+                                {{ $user['is_student'] }}
+                                {{ $user['school_owner'] }}
+                            </p>
+                        </li>
+                    </a>
                 </ul>
             @else
                 <p>there is no user to display</p>

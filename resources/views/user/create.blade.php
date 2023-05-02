@@ -18,9 +18,9 @@
                 </div>
 
                 <div>
-                    <label for="user-last-name">Last Name</label>
-                    <input id="user-last-name" name="user-last-name" value="{{ old('user-last-name') }}" type="text">
-                    @error('user-last-name')
+                    <label for="user_last_name">Last Name</label>
+                    <input id="user_last_name" name="user_last_name" value="{{ old('user_last_name') }}" type="text">
+                    @error('user_last_name')
                         <div class="forme-error">
                             {{ $message }}
                         </div>
