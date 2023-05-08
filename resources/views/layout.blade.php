@@ -20,6 +20,7 @@
         <nav>
             <a href="{{ route('users.create') }}">Create User</a>
             <a href="{{ route('home.index') }}">Index</a>
+            <a href="{{ route('users.index') }}">User</a>
         </nav>
 
     </div>

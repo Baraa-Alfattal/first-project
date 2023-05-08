@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
     public function index()
     {
         return view('user.index', [
-            'users' => User::all()
+            'users' => User::paginate()
         ]);
     }
 
@@ -32,10 +35,10 @@ class UserController extends Controller
             'user_first_name' => 'required',
             'user_last_name' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed|min:8',
-            'is_admin' => 'requierd|boolean',
-            'is_student' => 'requierd|boolean',
-            'school_owner' => 'requierd|boolean'
+            'password' => [
+                Password::min(8)->letters()->numbers()->required(), 'confirmed'
+            ],
+
 
         ]);
 
@@ -55,31 +58,79 @@ class UserController extends Controller
             'password' => Hash::make($request->password), 'is_admin' => $request->is_admin,
             'is_student' => $request->is_student, 'school_owner' => $request->school_owner
         ]);
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($user)
     {
-        //
+        $rule = [
+            'user' => ['required', 'exists:user,id'],
+        ];
+
+        $validation = Validator::make([
+            'user' => $user
+        ], $rule);
+
+        if (!$validation->fails()) {
+            $index = User::findOrFail($user);
+            return view('user.show', [
+                'user' => $index
+            ]);
+        } else {
+            return $validation->errors();
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($user)
     {
-        //
+        $rule = [
+            'user-id' => ['required', 'exists:user,id'],
+        ];
+
+        $validation = Validator::make([
+            'user-id' => $user
+        ], $rule);
+
+        if (!$validation->fails()) {
+            $index = User::findOrFail($user);
+            return view('user.edit', [
+                'user' => $index
+            ]);
+        } else {
+            return $validation->errors();
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $user)
     {
-        //
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'password' => 'required',
+        ]);
+
+        $update = User::findorFail($user);
+
+        $update->first_name = $request->first_name;
+        $update->last_name = $request->last_name;
+        $update->password = $request->password;
+
+        // $update->name = strip_tags($request->input('computer-name'));
+        // $update->origin = strip_tags($request->input('computer-origin'));
+        // $update->price = strip_tags($request->input('computer-price'));
+
+        $update->save();
+
+        return redirect()->route('users.show', $update);
     }
 
     /**
