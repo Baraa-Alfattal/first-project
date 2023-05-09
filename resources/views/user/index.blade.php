@@ -4,7 +4,7 @@
 @section('content')
     <div>
         <div>
-            <h1>User mm</h1>
+            <h1>User</h1>
         </div>
 
         <div>
