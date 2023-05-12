@@ -34,14 +34,12 @@ class UserController extends Controller
         $request->validate([
             'user_first_name' => 'required',
             'user_last_name' => 'required',
-            'email' => 'required|email',
-            'password' => [
-                Password::min(8)->letters()->numbers()->required(), 'confirmed'
-            ],
-
-
+            'email' => 'required|email|unique:users,email',
+            'password' => ['required', 'min_digits:8', 'confirmed'],
+            'is_admin' => ['required'],
+            'is_student' => ['required'],
+            'school_owner' => ['required']
         ]);
-
         // $user = new User();
         // $user->first_name = strip_tags($request->input('user_first_name'));
         // $user->last_name = strip_tags($request->input('user_last_name'));
@@ -55,8 +53,8 @@ class UserController extends Controller
         $user = User::create([
             'first_name' => $request->user_first_name,
             'last_name' => $request->user_last_name, 'email' => $request->email,
-            'password' => Hash::make($request->password), 'is_admin' => $request->is_admin,
-            'is_student' => $request->is_student, 'school_owner' => $request->school_owner
+            'password' => Hash::make($request->password), 'is_admin' => $request->boolean('is_admin'),
+            'is_student' => $request->boolean('is_student'), 'school_owner' => $request->boolean('school_owner')
         ]);
         return redirect()->route('users.index');
     }
@@ -67,7 +65,7 @@ class UserController extends Controller
     public function show($user)
     {
         $rule = [
-            'user' => ['required', 'exists:user,id'],
+            'user' => ['required', 'exists:users,id'],
         ];
 
         $validation = Validator::make([
@@ -90,7 +88,7 @@ class UserController extends Controller
     public function edit($user)
     {
         $rule = [
-            'user-id' => ['required', 'exists:user,id'],
+            'user-id' => ['required', 'exists:users,id'],
         ];
 
         $validation = Validator::make([
@@ -113,16 +111,24 @@ class UserController extends Controller
     public function update(Request $request, $user)
     {
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'password' => 'required',
+            'first_name' => 'sometimes|required|string',
+            'last_name' => 'sometimes|required|string',
+            'password' => 'nullable|sometimes|min_digits:8|confirmed',
+            'is_student' => 'sometimes',
+            'is_admin' => 'sometimes',
+            'school_owner' => 'sometimes'
         ]);
 
         $update = User::findorFail($user);
 
         $update->first_name = $request->first_name;
         $update->last_name = $request->last_name;
-        $update->password = $request->password;
+        if ($request->password != null) {
+            $update->password = Hash::make($request->password);
+        }
+        $update->is_student = $request->is_student;
+        $update->is_admin = $request->is_admin;
+        $update->school_owner = $request->school_owner;
 
         // $update->name = strip_tags($request->input('computer-name'));
         // $update->origin = strip_tags($request->input('computer-origin'));

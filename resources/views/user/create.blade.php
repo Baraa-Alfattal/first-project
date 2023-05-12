@@ -70,7 +70,7 @@
 
                 <div>
                     <label for="is_student">is Student</label>
-                    <input id="is_student" name="is_student" type="checkbox" checked>
+                    <input id="is_student" name="is_student" type="checkbox">
                     @error('is_student')
                         <div class="frome-error">
                             {{ $message }}
