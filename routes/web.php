@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AboutSchoolController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,17 +20,20 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::view('/', 'welcome')->name('home.index');
+//Route::view('/', 'welcome')->name('home.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/', [SchoolController::class, 'index']);
+    Route::resource('school', SchoolController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('about_school', AboutSchoolController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('users', UserController::class);
 });
 
 

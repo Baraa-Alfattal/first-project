@@ -18,9 +18,12 @@
 
     <div>
         <nav>
+            <a href="{{ route('school.index') }}">School</a>
             <a href="{{ route('users.create') }}">Create User</a>
-            <a href="{{ route('home.index') }}">Index</a>
-            <a href="{{ route('users.index') }}">User</a>
+            <a href="{{ route('users.index') }}">Users</a>
+            <a href="{{ route('school.create') }}">Create School Helllo</a>
+            <a href="{{ route('about_school.create') }}">Create About School</a>
+            <a href="{{ route('about_school.index') }}">About School</a>
         </nav>
 
     </div>

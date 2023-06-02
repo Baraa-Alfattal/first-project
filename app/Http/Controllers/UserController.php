@@ -36,9 +36,9 @@ class UserController extends Controller
             'user_last_name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => ['required', 'min_digits:8', 'confirmed'],
-            'is_admin' => ['required'],
-            'is_student' => ['required'],
-            'school_owner' => ['required']
+            'is_admin' => ['required_without'],
+            'is_student' => ['required_without'],
+            'school_owner' => ['required_without']
         ]);
         // $user = new User();
         // $user->first_name = strip_tags($request->input('user_first_name'));

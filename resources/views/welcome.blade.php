@@ -4,11 +4,21 @@
 @section('content')
     <div>
         <div>
-            <h1>welcome me</h1>
+            <h1>School</h1>
         </div>
 
         <div>
-            this is the welcome pages
+            @if ($school != null)
+                <ul>
+                    <a href="{{ route('school.show') }}">
+                        <li>
+                            <h3>Hello Message</h3>
+                        </li>
+                    </a>
+                @else
+                    <p>there is no hello message</p>
+            @endif
+            </ul>
         </div>
     </div>
 @endsection
