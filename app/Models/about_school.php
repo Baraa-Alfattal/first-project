@@ -15,4 +15,7 @@ class about_school extends Model
         'contact',
         'school_link'
     ];
+    protected $cast = [
+        "contact" => "json"
+    ];
 }

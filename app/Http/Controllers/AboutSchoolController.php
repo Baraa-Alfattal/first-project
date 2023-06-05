@@ -34,24 +34,25 @@ class AboutSchoolController extends Controller
         $request->validate([
             'descreption' => 'required',
             'picture' => 'required',
-            'contact' => ['required', 'array'],
-            'contact.*.phone1' => ['required', 'string'],
-            'contact.*.phone2' => ['required', 'string'],
-            'contact.*.ardy1' => ['required', 'string'],
-            'contact.*.ardy2' => ['required', 'string'],
+            // 'contact' => ['required', 'array'],
+            'contact.phone1' => ['required', 'string'],
+            'contact.phone2' => ['required', 'string'],
+            'contact.ardy1' => ['required', 'string'],
+            'contact.ardy2' => ['required', 'string'],
 
             'school_link' => 'required|url'
         ]);
-        $about = about_school::create([
+        // return $request->contact['ardy2'];
+        return $about = about_school::create([
             'descreption' => $request->descreption,
-            'picture' => $request->picture,
+            'picture' => $request->picture, //
             'contact' => [
-                [
-                    "contact.phone1" => $request->contact->phone1,
-                    "contact.phone2" => $request->contact->phone2,
-                    "contact.ardy1" => $request->contact->ardy1,
-                    "contact.ardy2" => $request->contact->ardy2,
-                ]
+
+                "phone1" => $request->contact['phone1'],
+                "phone2" => $request->contact['phone2'],
+                "ardy1" => $request->contact['ardy1'],
+                "ardy2" => $request->contact['ardy2'],
+
             ],
             'school_link' => $request->school_link
         ]);

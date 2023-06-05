@@ -31,7 +31,7 @@
                     <label for="contact">Contact:</label>
 
                     <label> Phone1</label>
-                    <input id="contact.phone1" name="contact.phone1" value="{{ old('contact.phone1') }}" type="text">
+                    <input id="contact.phone1" name="contact[phone1]" value="{{ old('contact.phone1') }}" type="text">
                     @error('contact.phone1')
                         <div class="forme-error">
                             {{ $message }}
@@ -39,7 +39,7 @@
                     @enderror
 
                     <label> Phone2</label>
-                    <input id="contact.phone2" name="contact.phone2" value="{{ old('contact.phone2') }}" type="text">
+                    <input id="contact.phone2" name="contact[phone2]" value="{{ old('contact.phone2') }}" type="text">
                     @error('contact.phone2')
                         <div class="forme-error">
                             {{ $message }}
@@ -47,7 +47,7 @@
                     @enderror
 
                     <label> Ardy1</label>
-                    <input id="contact.ardy1" name="contact.ardy1" value="{{ old('contact.ardy1') }}" type="text">
+                    <input id="contact.ardy1" name="contact[ardy1]" value="{{ old('contact.ardy1') }}" type="text">
                     @error('contact.ardy1')
                         <div class="forme-error">
                             {{ $message }}
@@ -55,7 +55,7 @@
                     @enderror
 
                     <label> Ardy2 </label>
-                    <input id="contact.ardy2" name="contact.ardy2" value="{{ old('contact.ardy2') }}" type="text">
+                    <input id="contact.ardy2" name="contact[ardy2]" value="{{ old('contact.ardy2') }}" type="text">
                     @error('contact.ardy2')
                         <div class="forme-error">
                             {{ $message }}
