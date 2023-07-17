@@ -24,7 +24,7 @@ class User extends Authenticatable
         'password',
         'is_admin',
         'is_student',
-        'is_owner',
+        'school_owner',
     ];
 
     /**
@@ -46,6 +46,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean',
         'is_student' => 'boolean',
-        'is_owner' => 'boolean'
+        'school_owner' => 'boolean'
     ];
 }
