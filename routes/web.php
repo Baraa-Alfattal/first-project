@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 // });
 //Route::view('/', 'welcome')->name('home.index');
 
+//return Hash::make('12345678');
+//->middleware(['auth', 'verified']) delete
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -1,5 +1,9 @@
-@extends('layout')
+@extends('aboSamer_Layout.layout')
 @section('title', 'Edit User')
+
+@section('head')
+    <link href='{{ asset('css/Edit-profile.css') }}' rel='stylesheet'>
+@endsection
 
 @section('content')
     <div>
@@ -85,3 +89,76 @@
         </div>
     </div>
 @endsection
+
+
+<div class="container">
+    <header>Edit profile</header>
+    <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="form first">
+            <div class="details personal">
+                <span class="title">personal Details</span>
+                <div class="fields">
+                    <div class="input-field">
+                        <label for="first_name">First Name</label>
+                        <input id="first_name" name="first_name" value="{{ $user->first_name }}" type="text" required>
+                        @error('first_name')
+                        <div>
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    </div>
+
+                    <div class="input-field">
+                        <label for="last_name">Last Name</label>
+                        <input id="last_name" name="last_name" value="{{ $user->last_name }}" type="text" required>
+                        @error('last_name')
+                        <div>
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    </div>
+
+                </div>
+            </div>
+            <div class="details ID">
+                <span class="title">Identity Details</span>
+                <div class="fields">
+                    <div class="input-field">
+                        <label>Full Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="input-field">
+                        <label>Full Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="input-field">
+                        <label>Full Name</label>
+                        <input type="text" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label>Mobile number</label>
+                        <input type="number" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label>Full Name</label>
+                        <input type="text" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label>Full Name</label>
+                        <input type="text" required>
+                    </div>
+
+                </div>
+                <button class="nextBtn">
+                    <span class="btntext">Edit</span>
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
